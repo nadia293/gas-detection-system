@@ -1,0 +1,26 @@
+int gasSensor = A0;  // MQ-2 or MQ-135 sensor pin
+int buzzer = 8;      // Buzzer connected to pin 8
+int led = 7;         // LED warning
+
+void setup() {
+  pinMode(gasSensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int gasValue = analogRead(gasSensor);
+  Serial.print("Gas Level: ");
+  Serial.println(gasValue);
+
+  if (gasValue > 400) {
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(led, HIGH);
+  } else {
+    digitalWrite(buzzer, LOW);
+    digitalWrite(led, LOW);
+  }
+
+  delay(1000);
+}
